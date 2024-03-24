@@ -1,0 +1,334 @@
+WindowManager:
+    InitialScreen:
+    CalculatorScreenBelowMile:
+    CalculatorScreenAboveMile:
+
+<ButtonEventRow1@Button>
+    background_color: 0,0,0,0
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0,0,1,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [60]
+    font_name: "Calibriz"
+<ButtonEventRow2@Button>
+    background_color: 0,0,0,0
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (1,0,0,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [60]
+    font_name: "Calibriz"
+<ButtonEventRow3@Button>
+    background_color: 0,0,0,0
+    background_normal: ''
+    canvas.before:
+        Color:
+            rgba: (0,1,0,1)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [60]
+    font_name: "Calibriz"
+
+<GridLayoutInitial@GridLayout>
+    cols: 2
+
+<LabelSplits@Label>
+    background_color: [.65,.18,.95,1]
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            size: self.size
+            pos:self.pos
+    #size_hint: (.5,.5)
+    font_size: 40
+    padding: 20
+    font_name: "Calibriz"
+
+<picturebackground>
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source: r"D:\PYTHON PROJECTS\PROJECT 1\Pace Calculator\pacemain_white.jpg"
+            size: root.width, root.height
+            pos: self.pos
+
+<Button>:
+    font_size: 60
+
+<GridLayout>:
+    spacing: 10
+
+<GridLayoutInitial>:
+    spacing: 30
+    rows:1
+    cols:4
+
+#-----------------------------------------------------
+
+
+<InitialScreen>:
+    name: "initial"
+    GridLayout:
+        rows:2
+        cols:1
+
+        GridLayout:
+            rows:1
+            cols:1
+            size_hint: [.85,1]
+
+            GridLayout:
+                spacing: [50,50]
+                size: root.width, root.height
+                rows:4
+                cols:1
+
+                GridLayout:
+                    cols: 1
+                    Label:
+                        text: "Choose your event"
+                        color: 0,0,0,1
+                        font_size: 80
+                        font_name: "Cambriab"
+                        bold: True
+
+                GridLayoutInitial:
+                    Label: #BLANK
+                    ButtonEventRow1:
+                        id: event600
+                        text: "600m"
+                        on_press: root.presslower(event='600')
+                    ButtonEventRow1:
+                        id: event800
+                        text: "800m"
+                        on_press: root.presslower(event='800')
+                    Label: #BLANK
+
+                GridLayoutInitial:
+                    Label: #BLANK
+                    ButtonEventRow2:
+                        text: "1k"
+                        on_press: root.presslower(event='1000')
+
+                    ButtonEventRow2:
+                        text: "Mile"
+                        on_press: root.presslower(event='1mile')
+                    Label: #BLANK
+
+                GridLayoutInitial:
+                    Label: #BLANK
+                    ButtonEventRow3:
+                        text: "5k"
+                        on_press: root.pressabove(event='5000')
+
+                    ButtonEventRow3:
+                        text: "10k"
+                        on_press: root.pressabove(event='10000')
+                    Label: #BLANK
+
+            GridLayout:
+                rows:1
+                cols:1
+                size_hint: [.15,1]
+
+<CalculatorScreenBelowMile>:         #Distances of mile and below
+    name: "calculatorbelow_screen"
+    GridLayout:
+        cols: 1
+        rows: 3
+        size: root.width, root.height
+
+        GridLayout:         #Top of page
+            size_hint: [1,.2]
+            cols:1
+            Label:
+                text: "Enter your time in Min:Seconds"
+                color: 0,0,0,1
+                font_size: 50
+                font_name: "Cambriab"
+                #background_color: 0,1,0,1
+
+            Label:
+                text: "Ex: 2:00"
+                color: 0,0,0,1
+                font_size: 30
+                font_name: "Cambriab"
+                bold: True
+
+        GridLayout:     #MIDDLE SECTION
+            size_hint: [1,.40]
+            cols:2
+            GridLayout: #Time,box,and calculate below the two
+                cols: 1
+                rows: 2
+                size_hint: [.65,1]
+                GridLayout: #Time and box
+                    cols: 2
+                    rows: 1
+
+                    Label:
+                        text: "TIME:"
+                        color: 0,0,0,1
+                        bold: True
+                        font_size: 80
+                        pos_hint_x: .5
+                        pos_hint_y: .8
+
+                    TextInput:
+                        multiline: False
+                        id: inputbelow
+                        font_size: 90
+                GridLayout:
+                    cols: 1
+                    rows: 1
+                    Button:
+                        text: "Calculate"
+                        #color: [.65,.18,.95,1]
+                        background_color: 0,0,0,1
+                        on_press: root.press_calculate_below()
+            GridLayout:
+                cols: 1
+                size_hint: [.35,1]
+                Button:
+                    text: "Return"
+                    #color: [.65,.18,.95,1]
+                    background_color: 0,0,0,1
+                    on_press: root.press_return()
+
+
+
+                #ADD A SILLY PICTURE HERE
+
+        GridLayout:
+            size_hint: [1,.34]
+            cols: 2
+
+            GridLayout:      #Return bottom right
+                cols: 2
+                rows: 4
+                LabelSplits:
+                    text: "100m:"
+                LabelSplits:
+                    id: event100split
+                    text: ""
+                LabelSplits:
+                    text: "200m:"
+                LabelSplits:
+                    id: event200split
+                    text: ""
+                LabelSplits:
+                    text: "300m:"
+                LabelSplits:
+                    id: event300split
+                    text: ""
+                LabelSplits:
+                    text: "400m:"
+                LabelSplits:
+                    id: event400split
+                    text: ""
+
+<CalculatorScreenAboveMile>:         #Distances of above mile
+    name: "calculatorabove_screen"
+    GridLayout:
+        cols: 1
+        rows: 3
+        size: root.width, root.height
+
+        GridLayout:         #Top of page
+            size_hint: [1,.2]
+            cols:1
+            Label:
+                text: "Enter your time in Min:Seconds"
+                color: 0,0,0,1
+                font_size: 50
+                font_name: "Cambriab"
+                #background_color: 0,1,0,1
+
+            Label:
+                text: "Ex: 18:40"
+                color: 0,0,0,1
+                font_size: 30
+                font_name: "Cambriab"
+                bold: True
+
+        GridLayout:     #MIDDLE SECTION
+            size_hint: [1,.40]
+            cols:2
+            GridLayout: #Time,box,and calculate below the two
+                cols: 1
+                rows: 2
+                size_hint: [.65,1]
+                GridLayout: #Time and box
+                    cols: 2
+                    rows: 1
+
+                    Label:
+                        text: "TIME:"
+                        color: 0,0,0,1
+                        bold: True
+                        font_size: 80
+                        pos_hint_x: .5
+                        pos_hint_y: .8
+
+                    TextInput:
+                        multiline: False
+                        id: inputabove
+                        font_size: 90
+                GridLayout:
+                    cols: 1
+                    rows: 1
+                    Button:
+                        text: "Calculate"
+                        #color: [.65,.18,.95,1]
+                        background_color: 0,0,0,1
+                        on_press: root.press_calculate_above()
+            GridLayout:
+                cols: 1
+                size_hint: [.35,1]
+                Button:
+                    text: "Return"
+                    #color: [.65,.18,.95,1]
+                    background_color: 0,0,0,1
+                    on_press: root.press_return()
+
+
+
+                #ADD A SILLY PICTURE HERE
+
+        GridLayout:
+            size_hint: [1,.34]
+            cols: 2
+
+            GridLayout:      #Return bottom right
+                cols: 2
+                rows: 4
+                LabelSplits:
+                    text: "400m:"
+                LabelSplits:
+                    id: event400split
+                    text: ""
+                LabelSplits:
+                    text: "800m:"
+                LabelSplits:
+                    id: event800split
+                    text: ""
+                LabelSplits:
+                    text: "1200m:"
+                LabelSplits:
+                    id: event1200split
+                    text: ""
+                LabelSplits:
+                    text: "1600m:"
+                LabelSplits:
+                    id: event1600split
+                    text: ""
